@@ -28,14 +28,15 @@ class UtilsTest {
 
     @Test
     @Disabled
-    void computationFactorialForNegativeNumberShouldReturn1() {
+    void computationFactorialForNegativeNumberShouldReturnOne() {
         assertEquals(1, Utils.computeFactorial(-1));
     }
 
     @Test
     void computationFactorialWithTimeoutShouldBeDoneIn100Ms() {
+        int randomNumber = getRandomNumberInRange(10, 20);
         assertTimeout(Duration.ofMillis(100), () -> {
-            Utils.computeFactorial(getRandomNumberInRange(10, 20));
+            Utils.computeFactorial(randomNumber);
         });
     }
 
