@@ -7,13 +7,15 @@ import java.time.Duration;
 import java.util.Random;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTimeout;
 
 class UtilsTest {
 
     @Test
-    void concatenationOfNullWordsShouldReturnNull() {
-        assertEquals("nullnull", Utils.concatenateWords(null, null));
+    void concatenationOfNullWordsShouldThrowIllegalArgumentException() {
+        assertThrows(IllegalArgumentException.class, () ->
+                Utils.concatenateWords(null, null));
     }
 
     @Test
@@ -27,13 +29,19 @@ class UtilsTest {
     }
 
     @Test
-    @Disabled
-    void computationFactorialForNegativeNumberShouldReturnOne() {
-        assertEquals(1, Utils.computeFactorial(-1));
+    void computationOfFactorialOfNegativeNumberShouldThrowIllegalArgumentException() {
+        assertThrows(IllegalArgumentException.class, () ->
+                Utils.computeFactorial(-1));
     }
 
     @Test
-    void computationFactorialWithTimeoutShouldBeDoneIn100Ms() {
+    @Disabled
+    void computationOfFactorialOfPositiveNumberShouldNotThrowException() {
+        assertEquals(120, Utils.computeFactorial(5));
+    }
+
+    @Test
+    void computationOfFactorialWithTimeoutShouldBeDoneIn100Ms() {
         int randomNumber = getRandomNumberInRange(10, 20);
         assertTimeout(Duration.ofMillis(100), () -> {
             Utils.computeFactorial(randomNumber);
